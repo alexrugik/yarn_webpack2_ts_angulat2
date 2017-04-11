@@ -1,25 +1,29 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
+const config = {
     entry: {
-        app: './app/index.js',
+        app: './app/index.ts',
         vendor: './app-vendor/index.js'
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist/src'),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/'
     },
     module: {
-        rules: []
+        rules: [ // loaders will work with webpack 1 or 2; but will be renamed "rules" in future
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            {test: /\.tsx?$/, loader: 'ts-loader'}
+        ]
     },
     resolve: {
         modules: [
             'node_modules',
             path.resolve(__dirname, 'app')
         ],
-        extensions: ['.js', '.json', '.css'],
+        extensions: ['.js', '.ts', '.tsx', '.json', '.css'],
     },
     performance: {
         hints: 'warning',
@@ -39,12 +43,18 @@ module.exports = {
         compress: true,
         historyApiFallback: true,
         hot: true,
+        inline: true,
         https: false,
         noInfo: true,
-        inline: true,
         stats: 'errors-only',
     },
-    plugins: [],
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({template: './app/index.html'}),
+        new webpack.HotModuleReplacementPlugin({
+            multiStep: true
+        })
+    ],
     profile: true, // boolean
     // capture timing information
     bail: true, //boolean
@@ -62,3 +72,5 @@ module.exports = {
         // i. e. nfs shares
     },
 };
+
+module.exports = config;
