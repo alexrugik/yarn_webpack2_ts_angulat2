@@ -1,3 +1,1 @@
-export const VENDORS = [
-
-];
+module.exports = [];

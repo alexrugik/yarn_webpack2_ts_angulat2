@@ -1,6 +1,8 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 const path = require('path');
+
+const WEBPACK_DEV_SERVER_CONFIG = require('./webpack-config/webpack-dev-server.config');
+const WEBPACK_MODULE_CONFIG = require('./webpack-config/webpack-module.config');
+const WEBPACK_PLUGINS_CONFIG = require('./webpack-config/webpack-plugins.config');
 
 const config = {
     entry: {
@@ -12,12 +14,7 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/'
     },
-    module: {
-        rules: [ // loaders will work with webpack 1 or 2; but will be renamed "rules" in future
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            {test: /\.tsx?$/, loader: 'ts-loader'}
-        ]
-    },
+    module: WEBPACK_MODULE_CONFIG,
     resolve: {
         modules: [
             'node_modules',
@@ -36,25 +33,8 @@ const config = {
     devtool: 'source-map',
     context: __dirname,
     stats: "errors-only",
-    devServer: {
-        port: 7777,
-        contentBase: path.join(__dirname, 'dist'),
-        publicPath: '/dist/',
-        compress: true,
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        https: false,
-        noInfo: true,
-        stats: 'errors-only',
-    },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
-        new HtmlWebpackPlugin({template: './app/index.html'}),
-        new webpack.HotModuleReplacementPlugin({
-            multiStep: true
-        })
-    ],
+    devServer: WEBPACK_DEV_SERVER_CONFIG,
+    plugins: WEBPACK_PLUGINS_CONFIG,
     profile: true, // boolean
     // capture timing information
     bail: true, //boolean
@@ -64,8 +44,6 @@ const config = {
     watchOptions: {
         aggregateTimeout: 1000, // in ms
         // aggregates multiple changes to a single rebuild
-
-        poll: true,
         poll: 500, // intervall in ms
         // enables polling mode for watching
         // must be used on filesystems that doesn't notify on change
