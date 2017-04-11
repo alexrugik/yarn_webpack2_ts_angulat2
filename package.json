@@ -1,0 +1,17 @@
+{
+  "name": "yarn_webpack2_ts_angulat2",
+  "version": "1.0.0",
+  "description": "learning yarn_webpack2_ts_angular2",
+  "main": "index.js",
+  "repository": "https://github.com/alexrugik/yarn_webpack2_ts_angulat2.git",
+  "author": "Alex Ruzhinskiy <alexruzhinskiy@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "2"
+  },
+  "scripts": {
+    "start": "webpack --config webpack.config.js",
+    "build": "webpack"
+  }
+}
