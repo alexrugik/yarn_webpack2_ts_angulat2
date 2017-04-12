@@ -31,7 +31,7 @@ const config = {
         }
     },
     devtool: 'source-map',
-    stats: "errors-only",
+    stats: 'errors-only',
     devServer: WEBPACK_DEV_SERVER_CONFIG,
     plugins: WEBPACK_PLUGINS_CONFIG,
     profile: true, // boolean

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -10,5 +11,11 @@ module.exports = [
         inject: 'body'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin([path.resolve(__dirname, '../dist')], {
+        root: '/',
+        verbose: true,
+        dry: false,
+        watch: false
+    })
 ];
