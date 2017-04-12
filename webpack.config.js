@@ -31,7 +31,6 @@ const config = {
         }
     },
     devtool: 'source-map',
-    context: __dirname,
     stats: "errors-only",
     devServer: WEBPACK_DEV_SERVER_CONFIG,
     plugins: WEBPACK_PLUGINS_CONFIG,
