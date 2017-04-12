@@ -12,7 +12,7 @@ const config = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist/'
+        publicPath:  '/dist'
     },
     module: WEBPACK_MODULE_CONFIG,
     resolve: {
